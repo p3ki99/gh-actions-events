@@ -3,8 +3,16 @@ on:
   pull_request: 
     types:
       - opened
+    branches: 
+      - main
   workflow_dispatch:
-
+  push: 
+    branches:
+      - main
+      - 'dev-*' # * - all characters (no slashes)
+      - 'feat/**' # ** - all characters (with slashes)
+    paths-ignore:
+      - '.github/workflows/*' # push activates if we target one of this branched but we dont change the files in .github/workflows/
 jobs:
   deploy:
     runs-on: ubuntu-latest
